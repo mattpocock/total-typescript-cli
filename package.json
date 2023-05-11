@@ -1,10 +1,10 @@
 {
   "name": "@total-typescript/exercise-cli",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "",
-  "main": "dist/index.js",
+  "main": "dist/bin.js",
   "bin": {
-    "tt-cli": "node dist/bin.js"
+    "tt-cli": "./dist/bin.js"
   },
   "scripts": {
     "test": "vitest",

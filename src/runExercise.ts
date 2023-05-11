@@ -37,15 +37,17 @@ export const runExercise = (exercise: string, isSolution: boolean) => {
     path.join(srcPath, "**", "**.{ts,tsx}").replace(/\\/g, "/"),
   );
 
-  let pathIndicator = ".problem.";
+  let pathIndicators = [".problem.", ".explainer."];
 
   if (isSolution) {
-    pathIndicator = ".solution.";
+    pathIndicators = [".solution."];
   }
 
   const exerciseFile = allExercises.find((e) => {
     const base = path.parse(e).base;
-    return base.startsWith(exercise) && base.includes(pathIndicator);
+    return (
+      base.startsWith(exercise) && pathIndicators.some((i) => base.includes(i))
+    );
   });
 
   if (!exerciseFile) {

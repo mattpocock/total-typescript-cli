@@ -30,8 +30,10 @@ export const prepareStackblitz = () => {
   };
 
   exerciseNames.forEach((exercise) => {
-    newPackageJson.scripts[`e-${exercise}`] = `tt-cli ${exercise}`;
-    newPackageJson.scripts[`s-${exercise}`] = `tt-cli ${exercise} --solution`;
+    newPackageJson.scripts[`e-${exercise}`] = `tt-cli run ${exercise}`;
+    newPackageJson.scripts[
+      `s-${exercise}`
+    ] = `tt-cli run ${exercise} --solution`;
   });
 
   fs.writeFileSync(packageJsonPath, JSON.stringify(newPackageJson, null, 2));

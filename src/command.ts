@@ -8,6 +8,7 @@ program.version("0.0.1");
 
 program
   .command("run <exercise>")
+  .alias("exercise <exercise>")
   .description("Runs an exercise on watch mode")
   .option("-s, --solution", "Run the solution")
   .action(
