@@ -26,7 +26,7 @@ export const runExercise = (exercise: string, isSolution: boolean) => {
     })
     .join(" ");
 
-  const srcPath = path.resolve(__dirname, "../src");
+  const srcPath = path.resolve(process.cwd(), "./src");
 
   if (!exercise) {
     console.log("Please specify an exercise");
