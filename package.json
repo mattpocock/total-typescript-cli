@@ -1,0 +1,28 @@
+{
+  "name": "@total-typescript/exercise-cli",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "bin": {
+    "tt-cli": "dist/bin.js"
+  },
+  "scripts": {
+    "test": "vitest",
+    "build": "esbuild --bundle src/bin.ts --platform=node --outfile=dist/bin.js --packages=external"
+  },
+  "keywords": [],
+  "author": "Matt Pocock",
+  "license": "ISC",
+  "dependencies": {
+    "chokidar": "^3.5.3",
+    "commander": "^10.0.1",
+    "fast-glob": "^3.2.12"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.26.1",
+    "@types/node": "^20.1.2",
+    "esbuild": "^0.17.18",
+    "typescript": "^5.0.4",
+    "vitest": "^0.31.0"
+  }
+}
