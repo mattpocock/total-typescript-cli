@@ -3,28 +3,14 @@ import * as path from "path";
 import * as fg from "fast-glob";
 import { execSync } from "child_process";
 import * as chokidar from "chokidar";
+import { jsonc } from "jsonc";
 
 export const runExercise = (exercise: string, isSolution: boolean) => {
-  const tsconfig = JSON.parse(
-    fs.readFileSync(path.resolve(process.cwd(), "./tsconfig.json"), "utf8"),
-  );
+  const tsconfigPath = path.resolve(process.cwd(), "./tsconfig.json");
 
-  const compilerOptions = Object.entries(tsconfig.compilerOptions)
-    .map(([key, value]) => {
-      if (typeof value === "boolean") {
-        if (value) {
-          return `--${key}`;
-        }
-        return "";
-      }
+  const tempTsconfigPath = path.resolve(process.cwd(), "./tsconfig.temp.json");
 
-      if (Array.isArray(value)) {
-        return `--${key} ${value.join(" ")}`;
-      }
-
-      return `--${key} ${JSON.stringify(value)}`;
-    })
-    .join(" ");
+  const tsconfig = jsonc.parse(fs.readFileSync(tsconfigPath, "utf8"));
 
   const srcPath = path.resolve(process.cwd(), "./src");
 
@@ -71,7 +57,19 @@ export const runExercise = (exercise: string, isSolution: boolean) => {
         });
       }
       console.log("Checking types...");
-      const cmd = `tsc "${exerciseFile}" ${compilerOptions}`;
+
+      // Write a temp tsconfig.json
+      const tsconfigWithIncludes = {
+        ...tsconfig,
+        include: [exerciseFile],
+      };
+
+      fs.writeFileSync(
+        tempTsconfigPath,
+        JSON.stringify(tsconfigWithIncludes, null, 2),
+      );
+
+      const cmd = `tsc --project ${tempTsconfigPath}`;
 
       execSync(cmd, {
         stdio: "inherit",
@@ -79,6 +77,10 @@ export const runExercise = (exercise: string, isSolution: boolean) => {
       console.log("Typecheck complete. You finished the exercise!");
     } catch (e) {
       console.log("Failed. Try again!");
+
+      try {
+        fs.rmSync(tempTsconfigPath);
+      } catch (e) {}
     }
   });
 };
