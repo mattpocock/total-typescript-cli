@@ -3,14 +3,14 @@ import * as path from "path";
 import * as fg from "fast-glob";
 import { execSync } from "child_process";
 import * as chokidar from "chokidar";
-import { jsonc } from "jsonc";
+import { parse as jsonCParse } from "jsonc-parser";
 
 export const runExercise = (exercise: string, isSolution: boolean) => {
   const tsconfigPath = path.resolve(process.cwd(), "./tsconfig.json");
 
   const tempTsconfigPath = path.resolve(process.cwd(), "./tsconfig.temp.json");
 
-  const tsconfig = jsonc.parse(fs.readFileSync(tsconfigPath, "utf8"));
+  const tsconfig = jsonCParse(fs.readFileSync(tsconfigPath, "utf8"));
 
   const srcPath = path.resolve(process.cwd(), "./src");
 

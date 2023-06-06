@@ -1,6 +1,6 @@
 {
   "name": "@total-typescript/exercise-cli",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "",
   "main": "dist/bin.js",
   "bin": {
@@ -9,7 +9,7 @@
   "scripts": {
     "test": "vitest",
     "build": "esbuild --bundle src/bin.ts --platform=node --outfile=dist/bin.js --packages=external",
-    "release": "pnpm run build && changeset publish"
+    "prepublish": "pnpm run build"
   },
   "keywords": [],
   "author": "Matt Pocock",
@@ -18,7 +18,7 @@
     "chokidar": "^3.5.3",
     "commander": "^10.0.1",
     "fast-glob": "^3.2.12",
-    "jsonc": "^2.0.0"
+    "jsonc-parser": "^3.2.0"
   },
   "devDependencies": {
     "@changesets/cli": "^2.26.1",
