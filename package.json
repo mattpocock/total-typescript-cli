@@ -8,7 +8,8 @@
   },
   "scripts": {
     "build": "esbuild --bundle src/bin.ts --platform=node --outfile=dist/bin.js --packages=external",
-    "prepublish": "pnpm run build"
+    "ci": "pnpm run build",
+    "release": "pnpm run ci && changeset publish"
   },
   "keywords": [],
   "author": "Matt Pocock",
