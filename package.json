@@ -7,7 +7,6 @@
     "tt-cli": "./dist/bin.js"
   },
   "scripts": {
-    "test": "vitest",
     "build": "esbuild --bundle src/bin.ts --platform=node --outfile=dist/bin.js --packages=external",
     "prepublish": "pnpm run build"
   },
@@ -24,7 +23,6 @@
     "@changesets/cli": "^2.26.1",
     "@types/node": "^20.1.2",
     "esbuild": "^0.17.18",
-    "typescript": "^5.0.4",
-    "vitest": "^0.31.0"
+    "typescript": "^5.0.4"
   }
 }

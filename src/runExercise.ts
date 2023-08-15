@@ -1,86 +1,59 @@
-import * as fs from "fs";
-import * as path from "path";
 import * as fg from "fast-glob";
-import { execSync } from "child_process";
-import * as chokidar from "chokidar";
-import { parse as jsonCParse } from "jsonc-parser";
+import * as path from "path";
+import { detectExerciseType } from "./detectExerciseType";
+import { runFileBasedExercise } from "./runFileBasedExercise";
+import { runPackageJsonExercise } from "./runPackageJsonExercise";
 
-export const runExercise = (exercise: string, isSolution: boolean) => {
-  const tsconfigPath = path.resolve(process.cwd(), "./tsconfig.json");
-
-  const tempTsconfigPath = path.resolve(process.cwd(), "./tsconfig.temp.json");
-
-  const tsconfig = jsonCParse(fs.readFileSync(tsconfigPath, "utf8"));
-
+const findExerciseToRun = async (
+  exercise: string,
+  runSolution: boolean,
+): Promise<string> => {
   const srcPath = path.resolve(process.cwd(), "./src");
 
-  if (!exercise) {
-    console.log("Please specify an exercise");
-    process.exit(1);
-  }
+  const glob = `**/${exercise}*.{explainer,${
+    runSolution ? "solution" : "problem"
+  }}*`;
 
-  const allExercises = fg.sync(
-    path.join(srcPath, "**", "**.{ts,tsx}").replace(/\\/g, "/"),
+  const allExercises = await fg.default(
+    path.join(srcPath, "**", glob).replace(/\\/g, "/"),
+    {
+      onlyFiles: false,
+    },
   );
 
-  let pathIndicators = [".problem.", ".explainer."];
-
-  if (isSolution) {
-    pathIndicators = [".solution."];
-  }
-
-  const exerciseFile = allExercises.find((e) => {
-    const base = path.parse(e).base;
-    return (
-      base.startsWith(exercise) && pathIndicators.some((i) => base.includes(i))
-    );
-  });
+  const exerciseFile = allExercises[0];
 
   if (!exerciseFile) {
     console.log(`Exercise ${exercise} not found`);
     process.exit(1);
   }
 
-  // One-liner for current directory
-  chokidar.watch(exerciseFile).on("all", (event, path) => {
-    const fileContents = fs.readFileSync(exerciseFile, "utf8");
+  return exerciseFile;
+};
 
-    const containsVitest =
-      fileContents.includes(`from "vitest"`) ||
-      fileContents.includes(`from 'vitest'`);
-    try {
-      console.clear();
-      if (containsVitest) {
-        console.log("Running tests...");
-        execSync(`vitest run "${exerciseFile}" --passWithNoTests`, {
-          stdio: "inherit",
-        });
-      }
-      console.log("Checking types...");
+export const runExercise = async (exercise: string, runSolution: boolean) => {
+  if (!exercise) {
+    console.log("Please specify an exercise");
+    process.exit(1);
+  }
 
-      // Write a temp tsconfig.json
-      const tsconfigWithIncludes = {
-        ...tsconfig,
-        include: [exerciseFile],
-      };
+  const exerciseFile = await findExerciseToRun(exercise, runSolution);
 
-      fs.writeFileSync(
-        tempTsconfigPath,
-        JSON.stringify(tsconfigWithIncludes, null, 2),
-      );
+  const exerciseType = await detectExerciseType(exerciseFile);
 
-      const cmd = `tsc --project ${tempTsconfigPath}`;
+  if (exerciseType === "not-runnable") {
+    console.log(
+      `Exercise ${exercise} is not runnable. Follow the instructions in the video to complete it.`,
+    );
+    process.exit(0);
+  }
 
-      execSync(cmd, {
-        stdio: "inherit",
-      });
-      console.log("Typecheck complete. You finished the exercise!");
-    } catch (e) {
-      console.log("Failed. Try again!");
+  switch (exerciseType) {
+    case "file":
+      return await runFileBasedExercise(exerciseFile);
 
-      try {
-        fs.rmSync(tempTsconfigPath);
-      } catch (e) {}
-    }
-  });
+    case "package-json-with-dev-script":
+      return await runPackageJsonExercise(exerciseFile);
+  }
+  exerciseType satisfies never;
 };
