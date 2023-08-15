@@ -1,5 +1,11 @@
 # @total-typescript/exercise-cli
 
+## 0.3.0
+
+### Minor Changes
+
+- fa3c7de: Added the ability to run folder-based exercises, for the upcoming TT book.
+
 ## 0.2.1
 
 ### Patch Changes
