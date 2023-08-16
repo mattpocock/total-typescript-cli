@@ -1,6 +1,6 @@
-import * as fs from "fs";
+import * as fs from "fs/promises";
 import * as path from "path";
-import * as fg from "fast-glob";
+import { findAllExercises } from "./findAllExercises";
 
 /**
  * Adds a bunch of scripts, like e-01, e-02 to package.json
@@ -8,17 +8,14 @@ import * as fg from "fast-glob";
  * commands
  */
 
-export const prepareStackblitz = () => {
+export const prepareStackblitz = async () => {
   const packageJsonPath = path.resolve(process.cwd(), "package.json");
-  const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, "utf8"));
+  const packageJson = JSON.parse(await fs.readFile(packageJsonPath, "utf8"));
 
   const srcPath = path.resolve(process.cwd(), "./src");
-  const allExercises: string[] = fg.sync(
-    path.join(srcPath, "**", "**.{ts,tsx}").replace(/\\/g, "/"),
-  );
-  const exerciseFiles = allExercises.filter((exercise) =>
-    exercise.includes(".problem."),
-  );
+  const exerciseFiles = await findAllExercises(srcPath, {
+    allowedTypes: ["problem", "explainer"],
+  });
   const exerciseNames = exerciseFiles.map(
     (exercise) => path.parse(exercise).base.split("-")[0],
   );
@@ -36,5 +33,5 @@ export const prepareStackblitz = () => {
     ] = `tt-cli run ${exercise} --solution`;
   });
 
-  fs.writeFileSync(packageJsonPath, JSON.stringify(newPackageJson, null, 2));
+  await fs.writeFile(packageJsonPath, JSON.stringify(newPackageJson, null, 2));
 };

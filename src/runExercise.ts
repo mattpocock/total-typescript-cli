@@ -1,8 +1,8 @@
-import * as fg from "fast-glob";
 import * as path from "path";
 import { detectExerciseType } from "./detectExerciseType";
 import { runFileBasedExercise } from "./runFileBasedExercise";
 import { runPackageJsonExercise } from "./runPackageJsonExercise";
+import { findExercise } from "./findAllExercises";
 
 const findExerciseToRun = async (
   exercise: string,
@@ -10,18 +10,10 @@ const findExerciseToRun = async (
 ): Promise<string> => {
   const srcPath = path.resolve(process.cwd(), "./src");
 
-  const glob = `**/${exercise}*.{explainer,${
-    runSolution ? "solution" : "problem"
-  }}*`;
-
-  const allExercises = await fg.default(
-    path.join(srcPath, "**", glob).replace(/\\/g, "/"),
-    {
-      onlyFiles: false,
-    },
-  );
-
-  const exerciseFile = allExercises[0];
+  const exerciseFile = await findExercise(srcPath, {
+    num: exercise,
+    allowedTypes: ["explainer", runSolution ? "solution" : "problem"],
+  });
 
   if (!exerciseFile) {
     console.log(`Exercise ${exercise} not found`);
