@@ -1,5 +1,11 @@
 # @total-typescript/exercise-cli
 
+## 0.3.1
+
+### Patch Changes
+
+- f5b0436: Made prepare-stackblitz work with the new types of exercises.
+
 ## 0.3.0
 
 ### Minor Changes
