@@ -41,7 +41,7 @@ export const runFileBasedExercise = async (exerciseFile: string) => {
         JSON.stringify(tsconfigWithIncludes, null, 2),
       );
 
-      const cmd = `tsc --project ${tempTsconfigPath}`;
+      const cmd = `tsc --project "${tempTsconfigPath}"`;
 
       execSync(cmd, {
         stdio: "inherit",
