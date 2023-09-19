@@ -8,6 +8,25 @@ const searchToGlob = (search: {
   return `**/${search?.num ?? ""}*.{${search?.allowedTypes?.join(",") ?? ""}}*`;
 };
 
+export const findExerciseInCwd = async (
+  exercise: string,
+  runSolution: boolean,
+): Promise<string> => {
+  const srcPath = path.resolve(process.cwd(), "./src");
+
+  const exerciseFile = await findExercise(srcPath, {
+    num: exercise,
+    allowedTypes: ["explainer", runSolution ? "solution" : "problem"],
+  });
+
+  if (!exerciseFile) {
+    console.log(`Exercise ${exercise} not found`);
+    process.exit(1);
+  }
+
+  return exerciseFile;
+};
+
 export const findAllExercises = async (
   srcPath: string,
   search?: {

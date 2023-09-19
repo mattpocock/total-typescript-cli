@@ -1,27 +1,7 @@
-import * as path from "path";
 import { detectExerciseType } from "./detectExerciseType";
+import { findExerciseInCwd } from "./findAllExercises";
 import { runFileBasedExercise } from "./runFileBasedExercise";
 import { runPackageJsonExercise } from "./runPackageJsonExercise";
-import { findExercise } from "./findAllExercises";
-
-const findExerciseToRun = async (
-  exercise: string,
-  runSolution: boolean,
-): Promise<string> => {
-  const srcPath = path.resolve(process.cwd(), "./src");
-
-  const exerciseFile = await findExercise(srcPath, {
-    num: exercise,
-    allowedTypes: ["explainer", runSolution ? "solution" : "problem"],
-  });
-
-  if (!exerciseFile) {
-    console.log(`Exercise ${exercise} not found`);
-    process.exit(1);
-  }
-
-  return exerciseFile;
-};
 
 export const runExercise = async (exercise: string, runSolution: boolean) => {
   if (!exercise) {
@@ -29,7 +9,7 @@ export const runExercise = async (exercise: string, runSolution: boolean) => {
     process.exit(1);
   }
 
-  const exerciseFile = await findExerciseToRun(exercise, runSolution);
+  const exerciseFile = await findExerciseInCwd(exercise, runSolution);
 
   const exerciseType = await detectExerciseType(exerciseFile);
 
