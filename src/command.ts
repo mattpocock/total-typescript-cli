@@ -5,6 +5,7 @@ import {
   compareSnapshotAgainstExisting,
   takeSnapshot,
 } from "./snapshotExercises";
+import { upgrade } from "./upgrade";
 
 export const program = new Command();
 
@@ -38,3 +39,10 @@ program
   .command("compare-snapshot <snapshotPath>")
   .description("Compares the current state of the exercises against a snapshot")
   .action(compareSnapshotAgainstExisting);
+
+program
+  .command("upgrade")
+  .description(
+    "Upgrades TypeScript, Vitest and the TT CLI to the latest version, with snapshot tests.",
+  )
+  .action(upgrade);
