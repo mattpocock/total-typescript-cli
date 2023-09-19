@@ -1,5 +1,11 @@
 # @total-typescript/exercise-cli
 
+## 0.3.2
+
+### Patch Changes
+
+- 1a1abb5: Fixed a bug where folder paths containing spaces were not working.
+
 ## 0.3.1
 
 ### Patch Changes
