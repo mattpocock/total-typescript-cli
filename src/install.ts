@@ -19,13 +19,7 @@ export const npm = (cmd: string, opts?: ExecSyncOptionsWithBufferEncoding) => {
 };
 
 export const npx = (cmd: string, opts?: ExecSyncOptionsWithBufferEncoding) => {
-  // if (existsSync(lockfiles.pnpm)) {
-  //   return execSync(`pnpx ${cmd}`, opts);
-  // }
   return execSync(`npx ${cmd}`, opts);
 
-  if (existsSync(lockfiles.npm)) {
-  }
-
-  throw new Error("Could not find a lockfile.");
+  // throw new Error("Could not find a lockfile.");
 };
