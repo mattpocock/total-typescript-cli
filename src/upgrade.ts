@@ -3,12 +3,13 @@ import {
   compareSnapshotAgainstExisting,
   takeSnapshot,
 } from "./snapshotExercises";
+import { npm } from "./install";
 
 export const upgrade = async () => {
   await takeSnapshot("./snap");
 
-  execSync(
-    "npm add -D typescript@latest vitest@latest @total-typescript/exercise-cli@latest",
+  npm(
+    "add -D typescript@latest vitest@latest @total-typescript/exercise-cli@latest",
     {
       cwd: process.cwd(),
       stdio: "inherit",

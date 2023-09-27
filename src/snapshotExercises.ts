@@ -1,14 +1,13 @@
 import { execSync } from "child_process";
-import * as path from "path";
-import { cleanVitestOutput } from "./cleanVitestOutput";
-import { readFileSync, writeFileSync, writeSync } from "fs";
-import Diff from "diff";
 import "colors";
+import { readFileSync, writeFileSync } from "fs";
+import { cleanVitestOutput } from "./cleanVitestOutput";
+import { npx } from "./install";
 
 const getTSSnapshot = (rootFolder: string): string => {
   let result: string;
   try {
-    result = execSync(`npx tsc`, {
+    result = npx(`tsc`, {
       cwd: rootFolder,
     }).toString();
   } catch (error: any) {
@@ -21,7 +20,7 @@ const getVitestSnapshot = (rootFolder: string): string => {
   let result: string;
 
   try {
-    result = execSync(`npx vitest run --reporter=json`, {
+    result = npx(`vitest run --reporter=json`, {
       cwd: rootFolder,
       stdio: "pipe",
     }).toString();
