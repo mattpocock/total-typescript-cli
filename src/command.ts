@@ -6,10 +6,17 @@ import {
   takeSnapshot,
 } from "./snapshotExercises";
 import { upgrade } from "./upgrade";
+import { runPrompts } from "./runPrompts";
 
 export const program = new Command();
 
-program.version("0.0.1");
+program.version("0.3.3");
+
+program
+  .command("run")
+  .alias("exercise")
+  .description("Open a prompt to select an exercise to run")
+  .action(runPrompts);
 
 program
   .command("run <exercise>")
