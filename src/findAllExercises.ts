@@ -29,9 +29,9 @@ export const findExerciseInCwd = async (
 
 export const findAllExercises = async (
   srcPath: string,
-  search?: {
+  search: {
     num?: string;
-    allowedTypes?: ("explainer" | "solution" | "problem")[];
+    allowedTypes: ("explainer" | "solution" | "problem")[];
   },
 ): Promise<string[]> => {
   const glob = searchToGlob(search || {});

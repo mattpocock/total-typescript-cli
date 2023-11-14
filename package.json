@@ -1,15 +1,17 @@
 {
   "name": "@total-typescript/exercise-cli",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "",
+  "type": "module",
   "main": "dist/bin.js",
   "bin": {
     "tt-cli": "./dist/bin.js"
   },
   "scripts": {
-    "build": "esbuild --bundle src/bin.ts --platform=node --outfile=dist/bin.js --packages=external",
+    "build": "esbuild --bundle src/bin.ts --platform=node --outfile=dist/bin.js --packages=external --format=esm",
     "ci": "pnpm run build",
-    "release": "pnpm run ci && changeset publish"
+    "release": "pnpm run ci && changeset publish",
+    "local-link": "yarn unlink --global | true && pnpm run build && yarn link --global"
   },
   "keywords": [],
   "author": "Matt Pocock",
@@ -23,9 +25,11 @@
     "colors": "^1.4.0",
     "commander": "^10.0.1",
     "fast-glob": "^3.2.12",
-    "jsonc-parser": "^3.2.0"
+    "jsonc-parser": "^3.2.0",
+    "prompts": "^2.4.2"
   },
   "devDependencies": {
+    "@types/prompts": "^2.4.8",
     "@changesets/cli": "^2.26.1",
     "@types/diff": "^5.0.4",
     "@types/node": "^20.1.2",
