@@ -1,5 +1,12 @@
 # @total-typescript/exercise-cli
 
+## 0.4.0
+
+### Minor Changes
+
+- 82adb76: Added a snapshotting tool to replace the snapshots in each of the project directories.
+- dbf4066: Added the ability to run "tt-cli run" to open a prompt of which exercise you'd like to run.
+
 ## 0.3.2
 
 ### Patch Changes
