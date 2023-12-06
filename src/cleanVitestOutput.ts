@@ -12,6 +12,10 @@ const cleanInput = (input: string) => {
   return input.substring(firstCurlyBracketIndex, lastCurlyBracketIndex + 1);
 };
 
+/**
+ * This function cleans the output of Vitest by removing unnecessary properties.
+ * It also sorts the test results by the test name.
+ */
 export const cleanVitestOutput = (
   result: string,
   context: {
