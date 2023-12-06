@@ -1,5 +1,11 @@
 # @total-typescript/exercise-cli
 
+## 0.5.0
+
+### Minor Changes
+
+- d79b475: Upgraded vitest peer dependency.
+
 ## 0.4.0
 
 ### Minor Changes
