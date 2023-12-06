@@ -1,5 +1,17 @@
 import path from "path";
 
+const cleanInput = (input: string) => {
+  // Remove everything before the first '{' character
+  const firstCurlyBracketIndex = input.indexOf("{");
+  const lastCurlyBracketIndex = input.lastIndexOf("}");
+
+  if (firstCurlyBracketIndex === -1 || lastCurlyBracketIndex === -1) {
+    throw new Error("No curly bracket found");
+  }
+
+  return input.substring(firstCurlyBracketIndex, lastCurlyBracketIndex + 1);
+};
+
 export const cleanVitestOutput = (
   result: string,
   context: {
@@ -8,8 +20,8 @@ export const cleanVitestOutput = (
 ) => {
   const asJson: {
     startTime?: number;
-    endTime?: number;
-    duration?: number;
+    // endTime?: number;
+    // duration?: number;
     numFailedTestSuites?: number;
     numFailedTests?: number;
     numPassedTestSuites?: number;
@@ -23,16 +35,16 @@ export const cleanVitestOutput = (
       name: string;
       startTime?: number;
       endTime?: number;
-      duration?: number;
+      // duration?: number;
       assertionResults: {
         duration?: number;
       }[];
     }[];
-  } = JSON.parse(result.slice(1, -1));
+  } = JSON.parse(cleanInput(result));
 
   delete asJson.startTime;
-  delete asJson.endTime;
-  delete asJson.duration;
+  // delete asJson.endTime;
+  // delete asJson.duration;
   delete asJson.numFailedTestSuites;
   delete asJson.numFailedTests;
   delete asJson.numPassedTestSuites;
@@ -46,7 +58,6 @@ export const cleanVitestOutput = (
   asJson.testResults.forEach((testResult) => {
     delete testResult.startTime;
     delete testResult.endTime;
-    delete testResult.duration;
 
     testResult.name = path.relative(context.rootFolder, testResult.name);
 
