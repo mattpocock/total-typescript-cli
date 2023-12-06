@@ -29,10 +29,10 @@
     "prompts": "^2.4.2"
   },
   "devDependencies": {
-    "@types/prompts": "^2.4.8",
     "@changesets/cli": "^2.26.1",
     "@types/diff": "^5.0.4",
     "@types/node": "^20.1.2",
+    "@types/prompts": "^2.4.8",
     "esbuild": "^0.17.18",
     "typescript": "^5.0.4"
   }
