@@ -13,14 +13,8 @@ export const program = new Command();
 program.version("0.3.3");
 
 program
-  .command("run")
-  .alias("exercise")
-  .description("Open a prompt to select an exercise to run")
-  .action(runPrompts);
-
-program
-  .command("run <exercise>")
-  .alias("exercise <exercise>")
+  .command("run [exercise]")
+  .alias("exercise [exercise]")
   .description("Runs an exercise on watch mode")
   .option("-s, --solution", "Run the solution")
   .action(
@@ -29,7 +23,13 @@ program
       options: {
         solution: boolean;
       },
-    ) => runExercise(exercise, options.solution),
+    ) => {
+      if (exercise) {
+        runExercise(exercise, options.solution);
+      } else {
+        runPrompts();
+      }
+    },
   );
 
 program
