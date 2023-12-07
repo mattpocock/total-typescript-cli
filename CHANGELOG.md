@@ -1,5 +1,11 @@
 # @total-typescript/exercise-cli
 
+## 0.5.1
+
+### Patch Changes
+
+- de42a81: Fixed bug where you could no longer run specific exercises
+
 ## 0.5.0
 
 ### Minor Changes
