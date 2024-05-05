@@ -9,7 +9,7 @@ export type ExerciseType =
 const endsWithTsOrTsx = (filepath: string) =>
   filepath.endsWith(".ts") || filepath.endsWith(".tsx");
 
-const isDir = async (filepath: string) => {
+export const isDir = async (filepath: string) => {
   const stat = await fs.stat(filepath);
 
   return stat.isDirectory();

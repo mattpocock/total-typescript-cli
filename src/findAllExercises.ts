@@ -43,7 +43,7 @@ export const findAllExercises = async (
     },
   );
 
-  return allExercises;
+  return allExercises.sort((a, b) => a.localeCompare(b));
 };
 
 export const findExercise = async (
