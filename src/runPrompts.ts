@@ -10,9 +10,9 @@ export const runPrompts = async () => {
     allowedTypes: ["explainer", "problem", "solution"],
   });
 
-  const { exercisePath } = await prompts({
+  const { exercisePath }: { exercisePath: string } = await prompts({
     type: "autocomplete",
-    message: "Select an exercise file to run",
+    message: "Select an exercise file to run (type to autocomplete)",
     name: "exercisePath",
     async suggest(input: string, choices) {
       return choices.filter((choice) => {

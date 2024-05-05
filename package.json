@@ -8,10 +8,11 @@
     "tt-cli": "./dist/bin.js"
   },
   "scripts": {
+    "dev": "pnpm run build --watch",
     "build": "esbuild --bundle src/bin.ts --platform=node --outfile=dist/bin.js --packages=external --format=esm",
     "ci": "pnpm run build",
     "release": "pnpm run ci && changeset publish",
-    "local-link": "yarn unlink --global | true && pnpm run build && yarn link --global"
+    "local-link": "(yarn unlink --global | true) && pnpm run build && yarn link --global"
   },
   "keywords": [],
   "author": "Matt Pocock",
