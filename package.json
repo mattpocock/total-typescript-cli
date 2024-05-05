@@ -9,6 +9,7 @@
   },
   "scripts": {
     "dev": "pnpm run \"/dev:/\"",
+    "dev:esbuild": "pnpm run build --watch",
     "dev:tsc": "tsc --watch --preserveWatchOutput",
     "build": "esbuild --bundle src/bin.ts --platform=node --outfile=dist/bin.js --packages=external --format=esm",
     "ci": "tsc && pnpm run build",
@@ -35,6 +36,7 @@
     "@types/diff": "^5.0.4",
     "@types/node": "^20.1.2",
     "@types/prompts": "^2.4.8",
+    "esbuild": "^0.17.18",
     "typescript": "^5.0.4"
   }
 }

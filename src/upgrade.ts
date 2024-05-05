@@ -2,8 +2,8 @@ import { execSync } from "child_process";
 import {
   compareSnapshotAgainstExisting,
   takeSnapshot,
-} from "./snapshotExercises.js";
-import { npm } from "./install.js";
+} from "./snapshotExercises";
+import { npm } from "./install";
 
 const SNAPSHOT_FILE_LOCATION = "./snap.md";
 

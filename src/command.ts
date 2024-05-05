@@ -1,12 +1,12 @@
 import { Command } from "commander";
-import { runExercise } from "./runExercise.js";
-import { prepareStackblitz } from "./prepareStackblitz.js";
+import { runExercise } from "./runExercise";
+import { prepareStackblitz } from "./prepareStackblitz";
 import {
   compareSnapshotAgainstExisting,
   takeSnapshot,
-} from "./snapshotExercises.js";
-import { upgrade } from "./upgrade.js";
-import { runPrompts } from "./runPrompts.js";
+} from "./snapshotExercises";
+import { upgrade } from "./upgrade";
+import { runPrompts } from "./runPrompts";
 
 export const program = new Command();
 

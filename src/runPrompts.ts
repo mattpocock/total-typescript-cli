@@ -1,7 +1,7 @@
 import prompts from "prompts";
 import path from "path";
-import { findAllExercises } from "./findAllExercises.js";
-import { runExerciseFile } from "./runExercise.js";
+import { findAllExercises } from "./findAllExercises";
+import { runExerciseFile } from "./runExercise";
 
 export const runPrompts = async () => {
   const srcPath = path.resolve(process.cwd(), "./src");
