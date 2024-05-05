@@ -8,6 +8,11 @@ import { isDir } from "./detectExerciseType";
 import { findAllExercises } from "./findAllExercises";
 import { npx } from "./install";
 
+type Snapshot = {
+  title: string;
+  content: string;
+};
+
 const getTSSnapshotFromFolder = (folder: string): string => {
   let result: string;
   try {
@@ -42,17 +47,33 @@ const getTSSnapshotFromFolderExercises = async (
     }
   }
 
-  let result = "";
+  let snapshots: Snapshot[] = [];
 
   for (const exerciseFolder of exercisesWhichAreFolders) {
     console.log("Checking " + exerciseFolder);
 
     const tsSnapshot = getTSSnapshotFromFolder(exerciseFolder);
 
-    result += tsSnapshot.trim() + "\n";
+    snapshots.push({
+      title: exerciseFolder,
+      content: tsSnapshot,
+    });
   }
 
-  return result;
+  return snapshots.reduce((acc, snapshot) => {
+    return [
+      acc,
+      "",
+      `# [](${path.relative(
+        rootFolder,
+        path.join(snapshot.title, "tsconfig.json"),
+      )})`,
+      "",
+      "```txt",
+      snapshot.content,
+      "```",
+    ].join("\n");
+  }, "");
 };
 
 const getTSSnapshot = async (rootFolder: string): Promise<string> => {
@@ -62,7 +83,15 @@ const getTSSnapshot = async (rootFolder: string): Promise<string> => {
     rootFolder,
   );
 
-  return rootTSSnapshot + "\n\n" + tsSnapshotFromFolderExercises;
+  return [
+    `# Root TSConfig Snapshot`,
+    "",
+    "```txt",
+    rootTSSnapshot,
+    "```",
+    "",
+    tsSnapshotFromFolderExercises,
+  ].join("\n");
 };
 
 const getVitestSnapshot = (rootFolder: string): string => {
@@ -81,7 +110,13 @@ const getVitestSnapshot = (rootFolder: string): string => {
     rootFolder,
   });
 
-  return JSON.stringify(vitestOutput, null, 2);
+  return [
+    `# Vitest Snapshot`,
+    "",
+    "```json",
+    JSON.stringify(vitestOutput, null, 2),
+    "```",
+  ].join("\n");
 };
 
 const getSnapshot = async () => {

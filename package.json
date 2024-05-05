@@ -8,7 +8,9 @@
     "tt-cli": "./dist/bin.js"
   },
   "scripts": {
-    "dev": "pnpm run build --watch",
+    "dev": "pnpm run \"/dev:/\"",
+    "dev:esbuild": "pnpm run build --watch",
+    "dev:tsc": "tsc --watch --preserveWatchOutput",
     "build": "esbuild --bundle src/bin.ts --platform=node --outfile=dist/bin.js --packages=external --format=esm",
     "ci": "pnpm run build",
     "release": "pnpm run ci && changeset publish",

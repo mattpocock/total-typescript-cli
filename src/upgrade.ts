@@ -5,8 +5,10 @@ import {
 } from "./snapshotExercises";
 import { npm } from "./install";
 
+const SNAPSHOT_FILE_LOCATION = "./snap.md";
+
 export const upgrade = async () => {
-  await takeSnapshot("./snap");
+  await takeSnapshot(SNAPSHOT_FILE_LOCATION);
 
   npm(
     "add -D typescript@latest vitest@latest @total-typescript/exercise-cli@latest",
@@ -16,9 +18,9 @@ export const upgrade = async () => {
     },
   );
 
-  await compareSnapshotAgainstExisting("./snap");
+  await compareSnapshotAgainstExisting(SNAPSHOT_FILE_LOCATION);
 
-  execSync("rm -rf ./snap");
+  execSync(`rm -rf ${SNAPSHOT_FILE_LOCATION}`);
 
   console.log("Upgrade complete!");
 };

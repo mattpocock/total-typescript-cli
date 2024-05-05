@@ -1,4 +1,7 @@
-import { ExecSyncOptionsWithBufferEncoding, execSync } from "child_process";
+import {
+  type ExecSyncOptionsWithBufferEncoding,
+  execSync,
+} from "child_process";
 import { existsSync } from "fs";
 
 const lockfiles = {
