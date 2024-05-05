@@ -1,6 +1,6 @@
 import * as fs from "fs/promises";
 import * as path from "path";
-import { findAllExercises } from "./findAllExercises";
+import { findAllExercises } from "./findAllExercises.js";
 
 /**
  * Adds a bunch of scripts, like e-01, e-02 to package.json

@@ -3,10 +3,10 @@ import "colors";
 import { readFileSync, writeFileSync } from "fs";
 import { stat } from "fs/promises";
 import * as path from "path";
-import { cleanVitestOutput } from "./cleanVitestOutput";
-import { isDir } from "./detectExerciseType";
-import { findAllExercises } from "./findAllExercises";
-import { npx } from "./install";
+import { cleanVitestOutput } from "./cleanVitestOutput.js";
+import { isDir } from "./detectExerciseType.js";
+import { findAllExercises } from "./findAllExercises.js";
+import { npx } from "./install.js";
 
 type Snapshot = {
   title: string;
