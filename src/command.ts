@@ -1,12 +1,12 @@
 import { Command } from "commander";
-import { runExercise } from "./runExercise.js";
-import { prepareStackblitz } from "./prepareStackblitz.js";
+import { runExercise } from "./runExercise";
+import { prepareStackblitz } from "./prepareStackblitz";
 import {
   compareSnapshotAgainstExisting,
   takeSnapshot,
-} from "./snapshotExercises.js";
-import { upgrade } from "./upgrade.js";
-import { runPrompts } from "./runPrompts.js";
+} from "./snapshotExercises";
+import { upgrade } from "./upgrade";
+import { runPrompts } from "./runPrompts";
 
 export const program = new Command();
 
@@ -52,4 +52,11 @@ program
   .description(
     "Upgrades TypeScript, Vitest and the TT CLI to the latest version, with snapshot tests.",
   )
-  .action(upgrade);
+  .action(() => upgrade("latest"));
+
+program
+  .command("upgrade-beta")
+  .description(
+    "Upgrades TypeScript to the beta version, Vitest and the TT CLI to the latest versions, with snapshot tests.",
+  )
+  .action(() => upgrade("beta"));
