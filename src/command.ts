@@ -52,4 +52,11 @@ program
   .description(
     "Upgrades TypeScript, Vitest and the TT CLI to the latest version, with snapshot tests.",
   )
-  .action(upgrade);
+  .action(() => upgrade("latest"));
+
+program
+  .command("upgrade-beta")
+  .description(
+    "Upgrades TypeScript to the beta version, Vitest and the TT CLI to the latest versions, with snapshot tests.",
+  )
+  .action(() => upgrade("beta"));

@@ -20,8 +20,8 @@
   "author": "Matt Pocock",
   "license": "ISC",
   "peerDependencies": {
-    "typescript": "^5",
-    "vitest": "^1"
+    "typescript": "*",
+    "vitest": "*"
   },
   "dependencies": {
     "chokidar": "^3.5.3",
