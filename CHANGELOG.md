@@ -1,5 +1,18 @@
 # @total-typescript/exercise-cli
 
+## 0.6.0
+
+### Minor Changes
+
+- 88d8883: Made the upgrade script push to git after completion.
+- 5f463bc: Allowed snapshot to capture data inside folder-based exercises, allowing upgrade to be used on the book exercises.
+- 88d8883: Added an upgrade-beta command to test the latest TS beta
+
+### Patch Changes
+
+- 5f463bc: Fixed a bug where exercises did not return in the correct order
+- 88d8883: Updated the peer dependencies required by the CLI
+
 ## 0.5.1
 
 ### Patch Changes
