@@ -1,5 +1,12 @@
 # @total-typescript/exercise-cli
 
+## 0.6.1
+
+### Patch Changes
+
+- 6061eec: Improved the output of the compare snapshot function to output a git diff to stdout
+- 6061eec: Made the initial install during snapshotting output to the console
+
 ## 0.6.0
 
 ### Minor Changes
