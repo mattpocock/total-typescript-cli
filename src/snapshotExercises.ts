@@ -139,13 +139,13 @@ export const compareSnapshotAgainstExisting = async (outPath: string) => {
   const existingSnapshot = readFileSync(outPath, "utf8");
 
   if (newSnapshot !== existingSnapshot) {
-    execSync(`git add ${outPath}`);
+    execSync(`git add ${outPath}`, { stdio: "inherit" });
 
     writeFileSync(outPath, newSnapshot);
 
-    console.log(
-      "Snapshots differ. Original has been staged for commit. Check the diff in VSCode to see what changed.",
-    );
+    console.log("Snapshots differ. Showing diff:");
+
+    execSync(`git --no-pager diff ${outPath}`, { stdio: "inherit" });
     process.exit(1);
   }
 };

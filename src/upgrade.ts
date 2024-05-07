@@ -10,7 +10,9 @@ const SNAPSHOT_FILE_LOCATION = "./snap.md";
 export const upgrade = async (tsVersion: "latest" | "beta" | "rc") => {
   execSync("git pull");
 
-  npm("install");
+  npm("install", {
+    stdio: "inherit",
+  });
 
   await takeSnapshot(SNAPSHOT_FILE_LOCATION);
 
