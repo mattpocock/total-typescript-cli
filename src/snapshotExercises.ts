@@ -50,8 +50,6 @@ const getTSSnapshotFromFolderExercises = async (
   let snapshots: Snapshot[] = [];
 
   for (const exerciseFolder of exercisesWhichAreFolders) {
-    console.log("Checking " + exerciseFolder);
-
     const tsSnapshot = getTSSnapshotFromFolder(exerciseFolder);
 
     snapshots.push({
@@ -145,7 +143,7 @@ export const compareSnapshotAgainstExisting = async (outPath: string) => {
 
     console.log("Snapshots differ. Showing diff:");
 
-    execSync(`git --no-pager diff ${outPath}`, { stdio: "inherit" });
+    execSync(`git --no-pager diff --unified=0 ${outPath}`, { stdio: "inherit" });
     process.exit(1);
   }
 };
