@@ -1,5 +1,11 @@
 # @total-typescript/exercise-cli
 
+## 0.7.1
+
+### Patch Changes
+
+- 5d28610: Improved log output for upgrade script
+
 ## 0.6.1
 
 ### Patch Changes
