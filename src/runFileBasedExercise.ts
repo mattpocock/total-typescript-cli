@@ -47,7 +47,7 @@ export const runFileBasedExercise = async (exerciseFile: string) => {
       console.log("Typecheck complete. You finished the exercise!");
     } catch (e) {
       console.log("Failed. Try again!");
-
+    } finally {
       try {
         await fs.rm(tempTsconfigPath);
       } catch (e) {}
