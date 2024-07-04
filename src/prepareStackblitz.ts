@@ -13,7 +13,7 @@ const getPackageJsonScript = (
   type: "exercise" | "solution",
 ): string => {
   return [
-    `npx @total-typescript/exercise-cli@latest prune ${exercise}`,
+    `npx --yes @total-typescript/exercise-cli@latest prune ${exercise}`,
     `pnpm i`,
     `tt-cli run ${exercise} ${type === "solution" ? "--solution" : ""}`,
   ].join(" && ");
