@@ -2,12 +2,6 @@ import * as fs from "fs/promises";
 import * as path from "path";
 import { findAllExercises } from "./findAllExercises";
 
-/**
- * Adds a bunch of scripts, like e-01, e-02 to package.json
- * so that StackBlitz can run them programmatically via URL
- * commands
- */
-
 const getPackageJsonScript = (
   exercise: string,
   type: "exercise" | "solution",
@@ -17,6 +11,11 @@ const getPackageJsonScript = (
   ].join(" && ");
 };
 
+/**
+ * Adds a bunch of scripts, like e-01, e-02 to package.json
+ * so that StackBlitz can run them programmatically via URL
+ * commands
+ */
 export const prepareStackblitz = async () => {
   const packageJsonPath = path.resolve(process.cwd(), "package.json");
   const packageJson = JSON.parse(await fs.readFile(packageJsonPath, "utf8"));
