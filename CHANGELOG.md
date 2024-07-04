@@ -1,5 +1,17 @@
 # @total-typescript/exercise-cli
 
+## 0.8.0
+
+### Minor Changes
+
+- 1b46e96: Added the prune command, which helps speed up the stackblitz editor.
+
+### Patch Changes
+
+- 19a2317: Fixed a bug where tsconfig.temp.json did not always get deleted.
+- 5d28610: Improved log output for upgrade script
+- ce974cf: Made prepare-stackblitz clean up unused scripts
+
 ## 0.6.1
 
 ### Patch Changes

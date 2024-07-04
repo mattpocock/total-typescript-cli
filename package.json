@@ -1,6 +1,6 @@
 {
   "name": "@total-typescript/exercise-cli",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "",
   "type": "module",
   "packageManager": "pnpm@9.3.0",
@@ -8,6 +8,10 @@
   "bin": {
     "tt-cli": "./dist/bin.js"
   },
+  "files": [
+    "dist",
+    "CHANGELOG.md"
+  ],
   "scripts": {
     "dev": "pnpm run \"/dev:/\"",
     "dev:esbuild": "pnpm run build --watch",
