@@ -3,6 +3,7 @@
   "version": "0.7.0",
   "description": "",
   "type": "module",
+  "packageManager": "pnpm@9.3.0",
   "main": "dist/bin.js",
   "bin": {
     "tt-cli": "./dist/bin.js"
