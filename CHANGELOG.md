@@ -1,5 +1,11 @@
 # @total-typescript/exercise-cli
 
+## 0.8.2
+
+### Patch Changes
+
+- 8de0e7e: Fixed a bug where it asked you to install tt-cli
+
 ## 0.8.0
 
 ### Minor Changes
