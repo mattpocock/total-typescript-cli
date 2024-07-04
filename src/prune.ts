@@ -29,7 +29,9 @@ export const prune = async (exercise: string) => {
     process.exit(1);
   }
 
-  execSync(`rm -rf ${filesToDelete.map((f) => `"${f}"`).join(" ")}`, {
-    stdio: "inherit",
-  });
+  if (filesToDelete.length > 0) {
+    execSync(`rm -rf ${filesToDelete.map((f) => `"${f}"`).join(" ")}`, {
+      stdio: "inherit",
+    });
+  }
 };

@@ -35,7 +35,7 @@ program
   );
 
 program
-  .command("prune-other-exercises <exercise>")
+  .command("prune <exercise>")
   .description("Removes all exercise files except for the one specified")
   .action(prune);
 

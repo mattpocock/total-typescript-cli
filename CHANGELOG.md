@@ -1,5 +1,12 @@
 # @total-typescript/exercise-cli
 
+## 0.8.3
+
+### Patch Changes
+
+- 6b0f708: Made the npx command only run the latest
+- 6b0f708: Fixed bug with prune
+
 ## 0.8.2
 
 ### Patch Changes
