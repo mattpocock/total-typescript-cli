@@ -1,6 +1,7 @@
 import * as fs from "fs/promises";
 import * as path from "path";
 import { findAllExercises } from "./findAllExercises";
+import packageJson from '../package.json' with { type: 'json' }
 
 /**
  * Adds a bunch of scripts, like e-01, e-02 to package.json
@@ -13,7 +14,7 @@ const getPackageJsonScript = (
   type: "exercise" | "solution",
 ): string => {
   return [
-    `npx --yes @total-typescript/exercise-cli@latest prune ${exercise}`,
+    `npx --yes @total-typescript/exercise-cli@${packageJson.version} prune-other-exercises ${exercise}`,
     `pnpm i`,
     `tt-cli run ${exercise} ${type === "solution" ? "--solution" : ""}`,
   ].join(" && ");
