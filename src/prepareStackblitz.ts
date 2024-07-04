@@ -37,6 +37,14 @@ export const prepareStackblitz = async () => {
     ...packageJson.scripts,
   };
 
+  const scriptsWeControl = Object.keys(packageJson.scripts).filter((script) => {
+    return script.startsWith("e-") || script.startsWith("s-");
+  });
+
+  scriptsWeControl.forEach((script) => {
+    delete newPackageJson.scripts[script];
+  });
+
   exerciseNumbers.forEach((exerciseNumber) => {
     newPackageJson.scripts[`e-${exerciseNumber}`] = getPackageJsonScript(
       exerciseNumber,
