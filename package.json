@@ -18,6 +18,7 @@
     "dev:tsc": "tsc --watch --preserveWatchOutput",
     "build": "esbuild --bundle src/bin.ts --platform=node --outfile=dist/bin.js --packages=external --format=esm",
     "ci": "tsc && pnpm run build",
+    "local-release": "git clean -xdf && pnpm i && pnpm run ci && changeset version && changeset publish",
     "release": "pnpm run ci && changeset publish",
     "local-link": "(yarn unlink --global | true) && pnpm run build && yarn link --global"
   },
