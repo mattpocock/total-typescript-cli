@@ -7,10 +7,12 @@ import {
 } from "./snapshotExercises";
 import { upgrade } from "./upgrade";
 import { runPrompts } from "./runPrompts";
+import { prune } from "./prune";
+import packageJson from '../package.json' with { type: 'json' }
 
 export const program = new Command();
 
-program.version("0.3.3");
+program.version(packageJson.version);
 
 program
   .command("run [exercise]")
@@ -31,6 +33,11 @@ program
       }
     },
   );
+
+program
+  .command("prune <exercise>")
+  .description("Removes all exercise files except for the one specified")
+  .action(prune);
 
 program
   .command("prepare-stackblitz")

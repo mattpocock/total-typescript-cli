@@ -8,6 +8,17 @@ import { findAllExercises } from "./findAllExercises";
  * commands
  */
 
+const getPackageJsonScript = (
+  exercise: string,
+  type: "exercise" | "solution",
+): string => {
+  return [
+    `npx @total-typescript/exercise-cli@latest prune ${exercise}`,
+    `pnpm i`,
+    `tt-cli run ${exercise} ${type === "solution" ? "--solution" : ""}`,
+  ].join(" && ");
+};
+
 export const prepareStackblitz = async () => {
   const packageJsonPath = path.resolve(process.cwd(), "package.json");
   const packageJson = JSON.parse(await fs.readFile(packageJsonPath, "utf8"));
@@ -16,8 +27,8 @@ export const prepareStackblitz = async () => {
   const exerciseFiles = await findAllExercises(srcPath, {
     allowedTypes: ["problem", "explainer"],
   });
-  const exerciseNames = exerciseFiles.map(
-    (exercise) => path.parse(exercise).base.split("-")[0],
+  const exerciseNumbers: string[] = exerciseFiles.map(
+    (exercise) => path.parse(exercise).base.split("-")[0]!,
   );
 
   const newPackageJson = Object.assign({}, packageJson);
@@ -26,11 +37,15 @@ export const prepareStackblitz = async () => {
     ...packageJson.scripts,
   };
 
-  exerciseNames.forEach((exercise) => {
-    newPackageJson.scripts[`e-${exercise}`] = `tt-cli run ${exercise}`;
-    newPackageJson.scripts[
-      `s-${exercise}`
-    ] = `tt-cli run ${exercise} --solution`;
+  exerciseNumbers.forEach((exerciseNumber) => {
+    newPackageJson.scripts[`e-${exerciseNumber}`] = getPackageJsonScript(
+      exerciseNumber,
+      "exercise",
+    );
+    newPackageJson.scripts[`s-${exerciseNumber}`] = getPackageJsonScript(
+      exerciseNumber,
+      "solution",
+    );
   });
 
   await fs.writeFile(packageJsonPath, JSON.stringify(newPackageJson, null, 2));
