@@ -1,5 +1,5 @@
 #!/usr/bin/env node
 
-import { program } from "./command";
+import { totalTypeScriptCLI } from "./command";
 
-program.parse();
+totalTypeScriptCLI.parse();

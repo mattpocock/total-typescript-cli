@@ -11,11 +11,11 @@ import { prune } from "./prune";
 import packageJson from "../package.json" with { type: "json" };
 import { createSectionRepos } from "./create-section-repos";
 
-export const program = new Command();
+export const totalTypeScriptCLI = new Command();
 
-program.version(packageJson.version);
+totalTypeScriptCLI.version(packageJson.version);
 
-program
+totalTypeScriptCLI
   .command("run [exercise]")
   .alias("exercise [exercise]")
   .description("Runs an exercise on watch mode")
@@ -35,39 +35,39 @@ program
     },
   );
 
-program
+totalTypeScriptCLI
   .command("prune <exercise>")
   .description("Removes all exercise files except for the one specified")
   .action(prune);
 
-program
+totalTypeScriptCLI
   .command("create-section-repos")
   .description("Creates section repos")
   .action(createSectionRepos);
 
-program
+totalTypeScriptCLI
   .command("prepare-stackblitz")
   .description("Adds e-01, e-02 scripts to package.json")
   .action(prepareStackblitz);
 
-program
+totalTypeScriptCLI
   .command("take-snapshot <snapshotPath>")
   .description("Takes a snapshot of the current state of the exercises")
   .action(takeSnapshot);
 
-program
+totalTypeScriptCLI
   .command("compare-snapshot <snapshotPath>")
   .description("Compares the current state of the exercises against a snapshot")
   .action(compareSnapshotAgainstExisting);
 
-program
+totalTypeScriptCLI
   .command("upgrade")
   .description(
     "Upgrades TypeScript, Vitest and the TT CLI to the latest version, with snapshot tests.",
   )
   .action(() => upgrade("latest"));
 
-program
+totalTypeScriptCLI
   .command("upgrade-beta")
   .description(
     "Upgrades TypeScript to the beta version, Vitest and the TT CLI to the latest versions, with snapshot tests.",

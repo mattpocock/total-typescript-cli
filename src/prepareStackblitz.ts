@@ -6,9 +6,9 @@ const getPackageJsonScript = (
   exercise: string,
   type: "exercise" | "solution",
 ): string => {
-  return [
-    `tt-cli run ${exercise} ${type === "solution" ? "--solution" : ""}`,
-  ].join(" && ");
+  return [`tt-cli run ${exercise} ${type === "solution" ? "--solution" : ""}`]
+    .join(" && ")
+    .trim();
 };
 
 /**
