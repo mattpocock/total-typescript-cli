@@ -38,6 +38,7 @@
     "prompts": "^2.4.2"
   },
   "devDependencies": {
+    "prettier": "^3.3.2",
     "@changesets/cli": "^2.26.1",
     "@types/diff": "^5.0.4",
     "@types/node": "^20.1.2",

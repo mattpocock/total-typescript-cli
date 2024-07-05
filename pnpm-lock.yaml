@@ -45,6 +45,9 @@ importers:
       esbuild:
         specifier: ^0.23.0
         version: 0.23.0
+      prettier:
+        specifier: ^3.3.2
+        version: 3.3.2
       typescript:
         specifier: ^5.5.3
         version: 5.5.3
@@ -1264,6 +1267,11 @@ packages:
   prettier@2.8.8:
     resolution: {integrity: sha512-tdN8qQGvNjw4CHbY+XXk0JgCXn9QiF21a55rBe5LJAU+kDyC4WQn4+awm2Xfk2lQMk5fKup9XgzTZtGkjBdP9Q==}
     engines: {node: '>=10.13.0'}
+    hasBin: true
+
+  prettier@3.3.2:
+    resolution: {integrity: sha512-rAVeHYMcv8ATV5d508CFdn+8/pHPpXeIid1DdrPwXnaAdH7cqjVbpJaT5eq4yRAFU/lsbwYwSF/n5iNrdJHPQA==}
+    engines: {node: '>=14'}
     hasBin: true
 
   pretty-format@29.7.0:
@@ -2901,6 +2909,8 @@ snapshots:
 
   prettier@2.8.8: {}
 
+  prettier@3.3.2: {}
+
   pretty-format@29.7.0:
     dependencies:
       '@jest/schemas': 29.6.3
@@ -3200,16 +3210,15 @@ snapshots:
 
   vite@5.0.6(@types/node@20.1.2):
     dependencies:
-      '@types/node': 20.1.2
       esbuild: 0.19.8
       postcss: 8.4.32
       rollup: 4.6.1
     optionalDependencies:
+      '@types/node': 20.1.2
       fsevents: 2.3.3
 
   vitest@1.0.1(@types/node@20.1.2):
     dependencies:
-      '@types/node': 20.1.2
       '@vitest/expect': 1.0.1
       '@vitest/runner': 1.0.1
       '@vitest/snapshot': 1.0.1
@@ -3231,6 +3240,8 @@ snapshots:
       vite: 5.0.6(@types/node@20.1.2)
       vite-node: 1.0.1(@types/node@20.1.2)
       why-is-node-running: 2.2.2
+    optionalDependencies:
+      '@types/node': 20.1.2
     transitivePeerDependencies:
       - less
       - lightningcss

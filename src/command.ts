@@ -8,7 +8,8 @@ import {
 import { upgrade } from "./upgrade";
 import { runPrompts } from "./runPrompts";
 import { prune } from "./prune";
-import packageJson from '../package.json' with { type: 'json' }
+import packageJson from "../package.json" with { type: "json" };
+import { createSectionRepos } from "./create-section-repos";
 
 export const program = new Command();
 
@@ -38,6 +39,11 @@ program
   .command("prune <exercise>")
   .description("Removes all exercise files except for the one specified")
   .action(prune);
+
+program
+  .command("create-section-repos")
+  .description("Creates section repos")
+  .action(createSectionRepos);
 
 program
   .command("prepare-stackblitz")
