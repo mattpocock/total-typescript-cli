@@ -1,5 +1,15 @@
 # @total-typescript/exercise-cli
 
+## 0.9.0
+
+### Minor Changes
+
+- f9e4ee7: Added the create-section-repos command for creating repos based on the sections of the course
+
+### Patch Changes
+
+- f40d60e: Removed prune from prepare stackblitz
+
 ## 0.8.3
 
 ### Patch Changes

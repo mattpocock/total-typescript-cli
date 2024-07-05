@@ -94,7 +94,7 @@ export const createSectionRepos = async () => {
     } catch (e) {
       // Repo already exists, so add the remote
       // Add the remote
-      execSync(`git remote add origin https://github.com/${section.repo}.git`, {
+      execSync(`git remote add origin git@github.com:${section.repo}.git`, {
         cwd: repoPath,
       });
 
