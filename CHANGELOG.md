@@ -1,5 +1,11 @@
 # @total-typescript/exercise-cli
 
+## 0.9.2
+
+### Patch Changes
+
+- bbd986b: Made it mandatory to provide a GITHUB_TOKEN for create section repos
+
 ## 0.9.1
 
 ### Patch Changes
