@@ -6,6 +6,11 @@ import { findAllExercises, findAllSections } from "./findAllExercises";
 export const createSectionRepos = async () => {
   const srcPath = path.resolve(process.cwd(), "./src");
 
+  if (!process.env.GITHUB_TOKEN) {
+    console.log("Please set the GITHUB_TOKEN environment variable");
+    process.exit(1);
+  }
+
   const { sections, isASectionRepo } = await findAllSections(srcPath);
 
   if (!isASectionRepo) {
@@ -92,9 +97,11 @@ export const createSectionRepos = async () => {
       // Push the files
       execSync(`git push -u origin main`, { cwd: repoPath });
     } catch (e) {
+      const remoteUrl = `https://total-typescript-bot:${process.env.GITHUB_TOKEN}@github.com/${section.repo}.git`;
+
       // Repo already exists, so add the remote
       // Add the remote
-      execSync(`git remote add origin git@github.com:${section.repo}.git`, {
+      execSync(`git remote add origin ${remoteUrl}`, {
         cwd: repoPath,
       });
 

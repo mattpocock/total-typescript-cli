@@ -1,5 +1,11 @@
 # @total-typescript/exercise-cli
 
+## 0.9.1
+
+### Patch Changes
+
+- 825aad7: Changed to ssh-based remote
+
 ## 0.9.0
 
 ### Minor Changes
