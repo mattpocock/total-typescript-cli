@@ -1,5 +1,11 @@
 # @total-typescript/exercise-cli
 
+## 0.10.0
+
+### Minor Changes
+
+- fd1f038: Removed old commands: prune and upgrade
+
 ## 0.9.2
 
 ### Patch Changes
