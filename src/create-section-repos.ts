@@ -108,21 +108,25 @@ export const createSectionRepos = async () => {
       // Fetch the remote
       execSync(`git fetch`, { cwd: repoPath });
 
-      // IMPROVEMENT: only force push when the files have changed
-      const changedFiles = execSync(
-        `git diff --name-only origin/main main --`,
-        {
-          cwd: repoPath,
-        },
-      )
-        .toString()
-        .trim();
-
-      if (changedFiles) {
-        // Force push the files
+      try {
+        // IMPROVEMENT: only force push when the files have changed
+        const changedFiles = execSync(
+          `git diff --name-only origin/main main --`,
+          {
+            cwd: repoPath,
+          },
+        )
+          .toString()
+          .trim();
+        if (changedFiles) {
+          // Force push the files
+          execSync(`git push -u origin main --force`, { cwd: repoPath });
+        } else {
+          console.log("No files have changed, not pushing");
+        }
+      } catch (e) {
+      } finally {
         execSync(`git push -u origin main --force`, { cwd: repoPath });
-      } else {
-        console.log("No files have changed, not pushing");
       }
     }
   }
