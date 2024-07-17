@@ -1,6 +1,6 @@
 {
   "name": "@total-typescript/exercise-cli",
-  "version": "0.10.0",
+  "version": "0.10.1",
   "description": "",
   "type": "module",
   "packageManager": "pnpm@9.3.0",
