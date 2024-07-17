@@ -1,5 +1,11 @@
 # @total-typescript/exercise-cli
 
+## 0.10.1
+
+### Patch Changes
+
+- 966b434: Improved non-runnable exercise text to make it less confusing.
+
 ## 0.10.0
 
 ### Minor Changes
