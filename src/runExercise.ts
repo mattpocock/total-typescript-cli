@@ -11,18 +11,35 @@ export const runExercise = async (exercise: string, runSolution: boolean) => {
 
   const exerciseFile = await findExerciseInCwd(exercise, runSolution);
 
-  await runExerciseFile(exerciseFile);
+  await runExerciseFile(exerciseFile, exercise);
 };
 
-export const runExerciseFile = async (exercisePath: string) => {
+export const runExerciseFile = async (
+  exercisePath: string,
+  exercise: string,
+) => {
   const exerciseType = await detectExerciseType(exercisePath);
 
   if (exerciseType === "not-runnable") {
-    console.log(`Not all exercises in this repo are runnable.`);
+    console.log(`Exercise ${exercise} doesn't need the CLI.`.bold);
+
     console.log(
-      `This is intentional - some of the files in the repo are to help the instructor explain things.`,
+      ` - ` +
+        `You haven't done anything wrong!`.bold +
+        ` Your setup is working correctly.`,
     );
-    console.log(`Try running a different exercise!`);
+
+    console.log(
+      ` - ` +
+        `But this exercise doesn't require the CLI to be run to complete it.`,
+    );
+
+    console.log(
+      ` - Instead, ` +
+        `follow the instructions in the video`.bold +
+        ` to complete the exercise.`,
+    );
+
     process.exit(0);
   }
 
