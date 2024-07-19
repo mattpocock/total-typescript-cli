@@ -11,17 +11,14 @@ export const runExercise = async (exercise: string, runSolution: boolean) => {
 
   const exerciseFile = await findExerciseInCwd(exercise, runSolution);
 
-  await runExerciseFile(exerciseFile, exercise);
+  await runExerciseFile(exerciseFile);
 };
 
-export const runExerciseFile = async (
-  exercisePath: string,
-  exercise: string,
-) => {
+export const runExerciseFile = async (exercisePath: string) => {
   const exerciseType = await detectExerciseType(exercisePath);
 
   if (exerciseType === "not-runnable") {
-    console.log(`Exercise ${exercise} doesn't need the CLI.`.bold);
+    console.log(`This exercise doesn't need the CLI.`.bold);
 
     console.log(
       ` - ` +
