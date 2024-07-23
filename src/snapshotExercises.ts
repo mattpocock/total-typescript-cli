@@ -77,9 +77,8 @@ const getTSSnapshotFromFolderExercises = async (
 const getTSSnapshot = async (rootFolder: string): Promise<string> => {
   const rootTSSnapshot = getTSSnapshotFromFolder(rootFolder);
 
-  const tsSnapshotFromFolderExercises = await getTSSnapshotFromFolderExercises(
-    rootFolder,
-  );
+  const tsSnapshotFromFolderExercises =
+    await getTSSnapshotFromFolderExercises(rootFolder);
 
   return [
     `# Root TSConfig Snapshot`,
@@ -143,7 +142,9 @@ export const compareSnapshotAgainstExisting = async (outPath: string) => {
 
     console.log("Snapshots differ. Showing diff:");
 
-    execSync(`git --no-pager diff --unified=0 ${outPath}`, { stdio: "inherit" });
+    execSync(`git --no-pager diff --unified=0 ${outPath}`, {
+      stdio: "inherit",
+    });
     process.exit(1);
   }
 };

@@ -10,7 +10,9 @@ export class TestUtils {
 
   clearTestEnv() {
     rmSync(this.TEST_ENV_PATH, { recursive: true, force: true });
-    mkdirSync(this.TEST_ENV_PATH);
+    try {
+      mkdirSync(this.TEST_ENV_PATH);
+    } catch (e) {}
   }
 
   constructor() {
