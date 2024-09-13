@@ -12,6 +12,32 @@ const cleanInput = (input: string) => {
   return input.substring(firstCurlyBracketIndex, lastCurlyBracketIndex + 1);
 };
 
+export type VitestOutput = {
+  startTime?: number;
+  // endTime?: number;
+  // duration?: number;
+  numFailedTestSuites?: number;
+  numFailedTests?: number;
+  numPassedTestSuites?: number;
+  numPassedTests?: number;
+  numPendingTestSuites?: number;
+  numPendingTests?: number;
+  numTodoTests?: number;
+  numTotalTestSuites?: number;
+  numTotalTests?: number;
+  testResults: {
+    name: string;
+    startTime?: number;
+    endTime?: number;
+    // duration?: number;
+    assertionResults: {
+      duration?: number;
+      status?: string;
+      failureMessages?: string[];
+    }[];
+  }[];
+};
+
 /**
  * This function cleans the output of Vitest by removing unnecessary properties.
  * It also sorts the test results by the test name.
@@ -20,31 +46,9 @@ export const cleanVitestOutput = (
   result: string,
   context: {
     rootFolder: string;
-  },
+  }
 ) => {
-  const asJson: {
-    startTime?: number;
-    // endTime?: number;
-    // duration?: number;
-    numFailedTestSuites?: number;
-    numFailedTests?: number;
-    numPassedTestSuites?: number;
-    numPassedTests?: number;
-    numPendingTestSuites?: number;
-    numPendingTests?: number;
-    numTodoTests?: number;
-    numTotalTestSuites?: number;
-    numTotalTests?: number;
-    testResults: {
-      name: string;
-      startTime?: number;
-      endTime?: number;
-      // duration?: number;
-      assertionResults: {
-        duration?: number;
-      }[];
-    }[];
-  } = JSON.parse(cleanInput(result));
+  const asJson: VitestOutput = JSON.parse(cleanInput(result));
 
   delete asJson.startTime;
   // delete asJson.endTime;
@@ -67,6 +71,7 @@ export const cleanVitestOutput = (
 
     testResult.assertionResults.forEach((assertionResult) => {
       delete assertionResult.duration;
+      delete assertionResult.failureMessages;
     });
   });
 
