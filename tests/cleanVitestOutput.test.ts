@@ -9,8 +9,39 @@ it("Should remove failureMessages from assertionResults", () => {
           name: "test",
           assertionResults: [
             {
-              status: "failed",
               failureMessages: ["oh-dear"],
+            },
+          ],
+        },
+      ],
+    } satisfies VitestOutput),
+    {
+      rootFolder: "./",
+    }
+  );
+
+  expect(output).toEqual({
+    testResults: [
+      {
+        name: "test",
+        assertionResults: [{}],
+      },
+    ],
+  });
+});
+
+it("Should retain statuses of assertionResults", () => {
+  const output = cleanVitestOutput(
+    JSON.stringify({
+      testResults: [
+        {
+          name: "test",
+          assertionResults: [
+            {
+              status: "failed",
+            },
+            {
+              status: "passed",
             },
           ],
         },
@@ -28,6 +59,9 @@ it("Should remove failureMessages from assertionResults", () => {
         assertionResults: [
           {
             status: "failed",
+          },
+          {
+            status: "passed",
           },
         ],
       },
