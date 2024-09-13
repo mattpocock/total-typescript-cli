@@ -1,5 +1,11 @@
 # @total-typescript/exercise-cli
 
+## 0.11.0
+
+### Minor Changes
+
+- b166607: Made vitest snapshot more resistant to changes by deleting failure messages. Only whether the test failed or succeeded will now be stored in the snapshot.
+
 ## 0.10.1
 
 ### Patch Changes
