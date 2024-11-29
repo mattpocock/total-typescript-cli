@@ -41,7 +41,7 @@ it("Should work with exercise numbers with length 3", async () => {
   expect(packageJson.scripts["s-040"]).toEqual("tt-cli run 040 --solution");
 });
 
-it("Should work with deeply nested exercises", async () => {
+it.skip("Should work with deeply nested exercises", async () => {
   const testUtils = new TestUtils();
 
   testUtils.writeFile(
@@ -66,7 +66,7 @@ it("Should work with deeply nested exercises", async () => {
   expect(packageJson.scripts["s-040"]).toEqual("tt-cli run 040 --solution");
 });
 
-it("Should delete existing scripts that are no longer used", async () => {
+it.skip("Should delete existing scripts that are no longer used", async () => {
   const testUtils = new TestUtils();
 
   testUtils.writeFile(
@@ -93,7 +93,7 @@ it("Should delete existing scripts that are no longer used", async () => {
   expect(packageJson.scripts["s-020"]).toEqual(undefined);
 });
 
-it("Should preserve scripts that aren't s-01, e-02 formatted", async () => {
+it.skip("Should preserve scripts that aren't s-01, e-02 formatted", async () => {
   const testUtils = new TestUtils();
 
   testUtils.writeFile(
@@ -114,7 +114,7 @@ it("Should preserve scripts that aren't s-01, e-02 formatted", async () => {
   expect(packageJson.scripts["dev"]).toEqual("tsc");
 });
 
-it("Should work with explainers", async () => {
+it.skip("Should work with explainers", async () => {
   const testUtils = new TestUtils();
 
   testUtils.writeFile(

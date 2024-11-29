@@ -6,4 +6,9 @@ export default defineConfig({
       ignored: ["**/playground/**"],
     },
   },
+  test: {
+    sequence: {
+      concurrent: false,
+    },
+  },
 });
